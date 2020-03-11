@@ -1,0 +1,180 @@
+1
+00:00:00,000 --> 00:00:01,980
+When training neural networks,
+
+2
+00:00:01,980 --> 00:00:04,484
+a lot of the focus is placed on accuracy,
+
+3
+00:00:04,484 --> 00:00:08,670
+such as detecting the right bounding boxes and having them placed in the right spot.
+
+4
+00:00:08,670 --> 00:00:11,610
+But what should you actually do with those bounding boxes
+
+5
+00:00:11,610 --> 00:00:14,505
+or semantic masks, classes, etc?
+
+6
+00:00:14,505 --> 00:00:17,325
+What further information can we get from them?
+
+7
+00:00:17,325 --> 00:00:22,365
+Think of semantic segmentation performed over a road scene for a self-driving car.
+
+8
+00:00:22,365 --> 00:00:24,900
+The model says there are people to detected.
+
+9
+00:00:24,900 --> 00:00:26,670
+Should the car always stop?
+
+10
+00:00:26,670 --> 00:00:30,510
+If they're in the road or a crosswalk, probably so.
+
+11
+00:00:30,510 --> 00:00:33,960
+But if they're sitting in chairs at a cafe off to the side,
+
+12
+00:00:33,960 --> 00:00:36,150
+that's probably not incredibly important,
+
+13
+00:00:36,150 --> 00:00:39,020
+as long as your car keeps to its lane on the road.
+
+14
+00:00:39,020 --> 00:00:43,270
+How about if you have a pet with a particular affinity for eating trash?
+
+15
+00:00:43,270 --> 00:00:46,370
+You can ban him from the room where the trash can is,
+
+16
+00:00:46,370 --> 00:00:49,370
+but he might still ignore the rules when you aren't home.
+
+17
+00:00:49,370 --> 00:00:53,360
+If you detected your pet near the trash can with your webcam,
+
+18
+00:00:53,360 --> 00:00:56,900
+perhaps you could play a sound to remind him to stay away.
+
+19
+00:00:56,900 --> 00:01:00,455
+It's really important to get useful information from your model.
+
+20
+00:01:00,455 --> 00:01:05,690
+Information from one model can even be further used in an additional model.
+
+21
+00:01:05,690 --> 00:01:08,690
+Traffic data from one set of days could be used
+
+22
+00:01:08,690 --> 00:01:11,480
+to predict traffic on another set of days for example,
+
+23
+00:01:11,480 --> 00:01:13,385
+such as near to a sporting event.
+
+24
+00:01:13,385 --> 00:01:18,185
+Let's consider some basic logic to extract useful data from the model output.
+
+25
+00:01:18,185 --> 00:01:20,390
+In the road scene, you could perform
+
+26
+00:01:20,390 --> 00:01:23,600
+an analysis on what the pedestrian class appears over.
+
+27
+00:01:23,600 --> 00:01:26,460
+Is it a road or a sidewalk?
+
+28
+00:01:26,460 --> 00:01:30,530
+Or in this case, it can even be combined with other sensor data.
+
+29
+00:01:30,530 --> 00:01:34,130
+Is the pedestrian moving toward the road or away from it?
+
+30
+00:01:34,130 --> 00:01:36,775
+For the pet getting in the trash at
+
+31
+00:01:36,775 --> 00:01:40,220
+the bounding box for the trash can and the dog overlap at all,
+
+32
+00:01:40,220 --> 00:01:41,885
+play the warning sound.
+
+33
+00:01:41,885 --> 00:01:43,985
+For the traffic example,
+
+34
+00:01:43,985 --> 00:01:47,235
+you'd likely want to count how many bounding boxes there are,
+
+35
+00:01:47,235 --> 00:01:51,500
+but making sure to only count once for each vehicle until it leaves the screen.
+
+36
+00:01:51,500 --> 00:01:53,750
+You could also consider which part of the screen they
+
+37
+00:01:53,750 --> 00:01:56,195
+come from and which part they exit from.
+
+38
+00:01:56,195 --> 00:02:00,025
+Does the left turn arrow need to last longer near to a big event?
+
+39
+00:02:00,025 --> 00:02:04,250
+Maybe this might happen if all the cars seem to be heading in that direction.
+
+40
+00:02:04,250 --> 00:02:06,170
+In an earlier exercise,
+
+41
+00:02:06,170 --> 00:02:10,160
+you played around a bit with the confidence threshold of bounding box detections.
+
+42
+00:02:10,160 --> 00:02:13,595
+That's another useful way to extract statistics.
+
+43
+00:02:13,595 --> 00:02:17,200
+Are you making sure to throw out low confidence predictions?
+
+44
+00:02:17,200 --> 00:02:18,970
+In the next exercise,
+
+45
+00:02:18,970 --> 00:02:24,090
+you'll put some of these into action to keep some unfriendly pets apart.
+

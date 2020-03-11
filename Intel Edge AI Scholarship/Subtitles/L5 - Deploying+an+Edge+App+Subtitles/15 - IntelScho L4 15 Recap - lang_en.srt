@@ -1,0 +1,32 @@
+1
+00:00:00,000 --> 00:00:03,090
+In this lesson, we added some more edge skills to
+
+2
+00:00:03,090 --> 00:00:06,495
+your repertoire by covering basics of OpenCV,
+
+3
+00:00:06,495 --> 00:00:09,074
+handling input streams in OpenCV,
+
+4
+00:00:09,074 --> 00:00:12,555
+processing model outputs for additional useful information,
+
+5
+00:00:12,555 --> 00:00:17,490
+the basics of MQTT and their use with Internet of Things devices,
+
+6
+00:00:17,490 --> 00:00:20,640
+sending statistics and video streams to the server,
+
+7
+00:00:20,640 --> 00:00:22,740
+performance basics and also,
+
+8
+00:00:22,740 --> 00:00:28,720
+covered thinking about additional model use cases as well as end user needs.
+

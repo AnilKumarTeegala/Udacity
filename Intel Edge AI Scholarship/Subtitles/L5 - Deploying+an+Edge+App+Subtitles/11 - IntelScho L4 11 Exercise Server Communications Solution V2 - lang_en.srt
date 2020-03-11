@@ -1,0 +1,404 @@
+1
+00:00:00,000 --> 00:00:01,755
+Outstanding work.
+
+2
+00:00:01,755 --> 00:00:04,650
+You can now use all the pieces necessary to build
+
+3
+00:00:04,650 --> 00:00:08,085
+an Edge application as well send its data to a server.
+
+4
+00:00:08,085 --> 00:00:11,325
+Let's go ahead and take a quick look at my approach.
+
+5
+00:00:11,325 --> 00:00:13,605
+Back in the classroom Workspace,
+
+6
+00:00:13,605 --> 00:00:17,085
+we'll first look at how I use MQTT,
+
+7
+00:00:17,085 --> 00:00:21,390
+as well as sending the output frame with ffserver.
+
+8
+00:00:21,390 --> 00:00:26,280
+Let's go ahead and look first at what the input and output videos were for this,
+
+9
+00:00:26,280 --> 00:00:30,375
+just in case something on your side wasn't going to the browser correctly.
+
+10
+00:00:30,375 --> 00:00:35,430
+Our input video is just a very short video of a car driving down a highway.
+
+11
+00:00:35,430 --> 00:00:39,420
+However, this could be used in a self-driving car application.
+
+12
+00:00:39,420 --> 00:00:45,890
+The output video of our network is the semantic mask of the car driving along.
+
+13
+00:00:45,890 --> 00:00:51,740
+A self-driving car might seem like an odd application of sending data over the internet.
+
+14
+00:00:51,740 --> 00:00:54,590
+But think about if a car had an accident,
+
+15
+00:00:54,590 --> 00:00:57,455
+you might want to know data about the steering angle,
+
+16
+00:00:57,455 --> 00:01:00,350
+the speed, acceleration as well as what it is all
+
+17
+00:01:00,350 --> 00:01:03,890
+around it as the accident occurred and before it.
+
+18
+00:01:03,890 --> 00:01:05,995
+So here we are in the app,
+
+19
+00:01:05,995 --> 00:01:09,910
+and I've made sure that I import MQTT here,
+
+20
+00:01:09,910 --> 00:01:12,980
+and I've used an alias to shorten it a little bit.
+
+21
+00:01:12,980 --> 00:01:15,335
+I've also gone ahead and use socket,
+
+22
+00:01:15,335 --> 00:01:20,725
+which I'll use to actually load the host name and IP address for MQTT.
+
+23
+00:01:20,725 --> 00:01:22,740
+Note that I've set the port here,
+
+24
+00:01:22,740 --> 00:01:25,070
+although you won't need to actually check and make sure
+
+25
+00:01:25,070 --> 00:01:27,755
+the MQTT server is configured on this.
+
+26
+00:01:27,755 --> 00:01:31,870
+This is the standard but it could be different in different situations.
+
+27
+00:01:31,870 --> 00:01:36,185
+Above, we'll see that there are different classes that the output uses,
+
+28
+00:01:36,185 --> 00:01:39,470
+and then right when I start to actually in-fer on video,
+
+29
+00:01:39,470 --> 00:01:42,350
+before I even load the inference engine in,
+
+30
+00:01:42,350 --> 00:01:48,065
+I'm going to go ahead and establish my MQTT client and use some of the data above.
+
+31
+00:01:48,065 --> 00:01:50,435
+Note that this keep-alive interval,
+
+32
+00:01:50,435 --> 00:01:52,625
+just make sure to check every once in a while
+
+33
+00:01:52,625 --> 00:01:55,595
+that the connection hasn't been canceled from the other side.
+
+34
+00:01:55,595 --> 00:01:59,300
+Down below I'm going to go ahead and publish some of
+
+35
+00:01:59,300 --> 00:02:02,900
+the class information and some data from the speedometer.
+
+36
+00:02:02,900 --> 00:02:06,680
+I actually just created this for you at just a random speed,
+
+37
+00:02:06,680 --> 00:02:12,585
+but again it's just another example so you can practice using topics with MQTT.
+
+38
+00:02:12,585 --> 00:02:16,870
+Below that and outside of the inference request,
+
+39
+00:02:16,870 --> 00:02:19,100
+I've actually gone ahead and use
+
+40
+00:02:19,100 --> 00:02:23,960
+system.stdout to write out the output frame and flush it.
+
+41
+00:02:23,960 --> 00:02:25,745
+At the very bottom,
+
+42
+00:02:25,745 --> 00:02:27,600
+when everything's done running,
+
+43
+00:02:27,600 --> 00:02:29,470
+in our case the video's done,
+
+44
+00:02:29,470 --> 00:02:33,195
+I go ahead and disconnect from our MQTT client.
+
+45
+00:02:33,195 --> 00:02:37,865
+Now, at this point just because you entered in these two lines for
+
+46
+00:02:37,865 --> 00:02:42,200
+FFmpeg doesn't actually send that to the FFmpeg server.
+
+47
+00:02:42,200 --> 00:02:44,650
+You still need to make sure to feed it in when
+
+48
+00:02:44,650 --> 00:02:47,505
+you run the app itself from the command line.
+
+49
+00:02:47,505 --> 00:02:51,020
+Let's look at how to run this app within the workspace.
+
+50
+00:02:51,020 --> 00:02:53,405
+I have a few different terminal windows open.
+
+51
+00:02:53,405 --> 00:02:57,245
+Note that if you need to open new terminal windows, you can use New,
+
+52
+00:02:57,245 --> 00:03:00,455
+Terminal, up here in the menu from File,
+
+53
+00:03:00,455 --> 00:03:02,360
+and you'll be able to open more terminals.
+
+54
+00:03:02,360 --> 00:03:06,290
+In this case, this application actually needs four terminals open.
+
+55
+00:03:06,290 --> 00:03:11,960
+Here we have one for the node server related to the MQTT broker server.
+
+56
+00:03:11,960 --> 00:03:14,330
+This one will handle the UI.
+
+57
+00:03:14,330 --> 00:03:17,810
+We have another one that will handle FFmpeg,
+
+58
+00:03:17,810 --> 00:03:21,095
+and the last one will actually run the Python app.
+
+59
+00:03:21,095 --> 00:03:27,025
+So to start, the node./server.js,
+
+60
+00:03:27,025 --> 00:03:30,110
+and we should see that our Mosca server
+
+61
+00:03:30,110 --> 00:03:33,365
+which in this case it's our MQTT server, has started.
+
+62
+00:03:33,365 --> 00:03:36,295
+Over here, within the UI folder,
+
+63
+00:03:36,295 --> 00:03:39,035
+we use npm run dev.
+
+64
+00:03:39,035 --> 00:03:41,540
+This will go ahead and compile web pack,
+
+65
+00:03:41,540 --> 00:03:43,490
+and it'll take a few seconds here,
+
+66
+00:03:43,490 --> 00:03:47,390
+but at the end it should tell us that web pack has compiled successfully.
+
+67
+00:03:47,390 --> 00:03:51,590
+Here we now know that the UI is ready to go.
+
+68
+00:03:51,590 --> 00:03:54,200
+Next up is FFmpeg,
+
+69
+00:03:54,200 --> 00:03:59,580
+in this case the ffserver and we're just feeding in our configuration file.
+
+70
+00:04:00,010 --> 00:04:03,925
+Here we can see that ffserver has started.
+
+71
+00:04:03,925 --> 00:04:06,230
+Now we can actually run the app.
+
+72
+00:04:06,230 --> 00:04:08,840
+So again we'll start with actually running the app,
+
+73
+00:04:08,840 --> 00:04:13,085
+but we need to feed in FFmpeg with the Pipe symbol.
+
+74
+00:04:13,085 --> 00:04:16,160
+This means that the information coming from our Python script
+
+75
+00:04:16,160 --> 00:04:19,535
+will get fed to FFmpeg or pipe to it.
+
+76
+00:04:19,535 --> 00:04:23,750
+Here I'm also just saying that I want to see any warnings that might come out of it.
+
+77
+00:04:23,750 --> 00:04:26,120
+It's going to be in the format of raw video.
+
+78
+00:04:26,120 --> 00:04:29,315
+The pixel format is BGR.
+
+79
+00:04:29,315 --> 00:04:32,275
+This is our video size frame rate
+
+80
+00:04:32,275 --> 00:04:36,065
+and then this is actually part of our configuration file.
+
+81
+00:04:36,065 --> 00:04:40,115
+The IP address here's from the configuration file as well as the port
+
+82
+00:04:40,115 --> 00:04:44,210
+and this is just the file that the ffserver is actually going to pick up from.
+
+83
+00:04:44,210 --> 00:04:49,280
+Now if I run this, we won't actually see much output over here,
+
+84
+00:04:49,280 --> 00:04:52,490
+but because we had the MQTT server over here,
+
+85
+00:04:52,490 --> 00:04:54,380
+we'll be able to see what's getting published.
+
+86
+00:04:54,380 --> 00:04:59,000
+We'll see that both our classes and speedometer is getting published.
+
+87
+00:04:59,000 --> 00:05:01,945
+Here in the workspace, you can click on Open app,
+
+88
+00:05:01,945 --> 00:05:05,125
+and it'll take a second to actually load our image here,
+
+89
+00:05:05,125 --> 00:05:08,660
+but we'll be able to see that we have our class is counted
+
+90
+00:05:08,660 --> 00:05:12,350
+and speed coming in as well as the image,
+
+91
+00:05:12,350 --> 00:05:14,465
+that's our semantic mask output.
+
+92
+00:05:14,465 --> 00:05:17,570
+Note that this will run a little bit slow and that's just
+
+93
+00:05:17,570 --> 00:05:20,900
+because semantic segmentation is pretty resource-intensive.
+
+94
+00:05:20,900 --> 00:05:23,360
+This application of a self-driving car,
+
+95
+00:05:23,360 --> 00:05:28,175
+you'd probably have a GPU in the car so that you had additional acceleration.
+
+96
+00:05:28,175 --> 00:05:31,220
+We won't see more on GPUs until later courses,
+
+97
+00:05:31,220 --> 00:05:33,320
+but this is one potential application where you can
+
+98
+00:05:33,320 --> 00:05:36,395
+see that you might want to try out different hardware devices.
+
+99
+00:05:36,395 --> 00:05:40,295
+You've come a long way with your edge skills.
+
+100
+00:05:40,295 --> 00:05:44,645
+Now, we'll take a step away from all the code and try to use
+
+101
+00:05:44,645 --> 00:05:50,970
+additional thinking and analytical skills to further build up on your applications.
+

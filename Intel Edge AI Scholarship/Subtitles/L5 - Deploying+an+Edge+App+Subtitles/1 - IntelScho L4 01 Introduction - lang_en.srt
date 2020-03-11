@@ -1,0 +1,68 @@
+1
+00:00:00,000 --> 00:00:02,055
+It's great to have you back.
+
+2
+00:00:02,055 --> 00:00:05,220
+In the final exercise at the last lesson you
+
+3
+00:00:05,220 --> 00:00:09,315
+integrated everything you've learned so far into an Edge Application.
+
+4
+00:00:09,315 --> 00:00:12,480
+That app switched us from just images to using
+
+5
+00:00:12,480 --> 00:00:15,735
+videos as well as creating an output video.
+
+6
+00:00:15,735 --> 00:00:18,855
+However, what about using Webcam inputs,
+
+7
+00:00:18,855 --> 00:00:20,730
+or instead streaming information,
+
+8
+00:00:20,730 --> 00:00:24,195
+or the output video itself somewhere over the Internet.
+
+9
+00:00:24,195 --> 00:00:27,800
+In this lesson, we'll cover some crucial topics to do
+
+10
+00:00:27,800 --> 00:00:31,640
+so including some more basics of OpenCV,
+
+11
+00:00:31,640 --> 00:00:34,655
+handling input streams in OpenCV,
+
+12
+00:00:34,655 --> 00:00:38,330
+processing model outputs for additional useful information,
+
+13
+00:00:38,330 --> 00:00:41,185
+the basics of MQTT,
+
+14
+00:00:41,185 --> 00:00:44,015
+and its use with Internet of Things devices,
+
+15
+00:00:44,015 --> 00:00:49,070
+sending statistics and video streams to a server, performance basics,
+
+16
+00:00:49,070 --> 00:00:51,260
+and then we'll finish up by thinking about
+
+17
+00:00:51,260 --> 00:00:57,390
+additional model use cases as well as some end user needs. Let's get started.
+

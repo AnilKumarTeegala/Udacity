@@ -1,0 +1,136 @@
+1
+00:00:00,000 --> 00:00:02,910
+We're now through the programming parts of this lesson,
+
+2
+00:00:02,910 --> 00:00:04,395
+and to finish things off,
+
+3
+00:00:04,395 --> 00:00:08,130
+I want to cover some more discussion-based and analytical topics.
+
+4
+00:00:08,130 --> 00:00:11,130
+We've talked a lot about optimizing for inference,
+
+5
+00:00:11,130 --> 00:00:12,855
+and running apps at the edge.
+
+6
+00:00:12,855 --> 00:00:18,180
+But it's always important to not skip past the accuracy of your edge AI Model.
+
+7
+00:00:18,180 --> 00:00:21,900
+Lighter, quicker models are helpful for the edge,
+
+8
+00:00:21,900 --> 00:00:24,630
+and certain optimizations like lower precision that
+
+9
+00:00:24,630 --> 00:00:27,870
+help with these will have some impact on accuracy.
+
+10
+00:00:27,870 --> 00:00:31,950
+No amount of skillful post-processing and attempting to extract
+
+11
+00:00:31,950 --> 00:00:35,955
+useful data from the output will make up for a poor model choice,
+
+12
+00:00:35,955 --> 00:00:39,920
+or one where too many sacrifices were made for speed.
+
+13
+00:00:39,920 --> 00:00:42,200
+Of course, it all depends on
+
+14
+00:00:42,200 --> 00:00:46,670
+the exact application as to how much loss of accuracy is acceptable.
+
+15
+00:00:46,670 --> 00:00:49,250
+Detecting a pet gain into the trash
+
+16
+00:00:49,250 --> 00:00:52,975
+likely can handle less accuracy than a self-driving car.
+
+17
+00:00:52,975 --> 00:00:56,210
+Now, the considerations of speed, size,
+
+18
+00:00:56,210 --> 00:01:00,890
+and network impacts are still very important for AI at the edge.
+
+19
+00:01:00,890 --> 00:01:05,270
+Faster models can free up computation for other tests.
+
+20
+00:01:05,270 --> 00:01:07,475
+They can lead to less power usage,
+
+21
+00:01:07,475 --> 00:01:10,685
+and allow for the use of cheaper hardware.
+
+22
+00:01:10,685 --> 00:01:14,630
+Smaller models can also free up memory for other tasks,
+
+23
+00:01:14,630 --> 00:01:17,645
+or allow for devices with less memory to begin with.
+
+24
+00:01:17,645 --> 00:01:20,965
+We've also discussed some of the network impacts earlier on.
+
+25
+00:01:20,965 --> 00:01:23,875
+Especially for remote edge devices,
+
+26
+00:01:23,875 --> 00:01:29,645
+the power cost of heavy network communication may significantly hamper their use.
+
+27
+00:01:29,645 --> 00:01:34,340
+Lastly, there can be other differences in Cloud versus edge costs,
+
+28
+00:01:34,340 --> 00:01:36,470
+other than just network effects.
+
+29
+00:01:36,470 --> 00:01:39,260
+While potentially being lower up front,
+
+30
+00:01:39,260 --> 00:01:43,190
+cloud storage and computation costs can add up over time.
+
+31
+00:01:43,190 --> 00:01:45,425
+As we discussed earlier on,
+
+32
+00:01:45,425 --> 00:01:48,940
+data sent the cloud could be intercepted along the way.
+
+33
+00:01:48,940 --> 00:01:52,580
+Although, this does depend on a secure edge device,
+
+34
+00:01:52,580 --> 00:01:56,520
+which is not always the case for the internet of things.
+

@@ -1,0 +1,92 @@
+1
+00:00:00,000 --> 00:00:03,645
+So far I've mentioned node servers a few times.
+
+2
+00:00:03,645 --> 00:00:06,900
+So let's briefly cover what exactly these are.
+
+3
+00:00:06,900 --> 00:00:11,250
+Node.js is an open source environment for servers,
+
+4
+00:00:11,250 --> 00:00:14,670
+where JavaScript can be run outside of a browser.
+
+5
+00:00:14,670 --> 00:00:17,715
+Think about a social media page for instance,
+
+6
+00:00:17,715 --> 00:00:22,010
+that page is going to contain different content for each different user,
+
+7
+00:00:22,010 --> 00:00:23,585
+based on their social network.
+
+8
+00:00:23,585 --> 00:00:27,500
+Node allows for JavaScript to run outside of the browser to gather
+
+9
+00:00:27,500 --> 00:00:32,585
+the various relevant post for each given user and then send those posts to the browser.
+
+10
+00:00:32,585 --> 00:00:38,465
+In our case, a node server can be used to handle the data coming in from the MQTT
+
+11
+00:00:38,465 --> 00:00:44,960
+and FFmpeg servers and then actually render that content for a webpage user interface.
+
+12
+00:00:44,960 --> 00:00:48,650
+In the upcoming exercise as well as in the project,
+
+13
+00:00:48,650 --> 00:00:50,900
+you'll be given the main Node servers;
+
+14
+00:00:50,900 --> 00:00:55,235
+one for the UI and one for the MQTT server.
+
+15
+00:00:55,235 --> 00:00:59,555
+It will be your job to communicate with them from the Python app.
+
+16
+00:00:59,555 --> 00:01:02,780
+Note that you can also utilize a more basic front-end
+
+17
+00:01:02,780 --> 00:01:06,050
+with HTML and CSS for a web page like this.
+
+18
+00:01:06,050 --> 00:01:10,415
+But these type of front-end skills are outside the scope of this course.
+
+19
+00:01:10,415 --> 00:01:12,770
+Using these type of servers though,
+
+20
+00:01:12,770 --> 00:01:16,970
+is closer to a more end-to-end piece for the Internet of Things.
+
+21
+00:01:16,970 --> 00:01:19,280
+So you've built out your app but what
+
+22
+00:01:19,280 --> 00:01:22,265
+happens to the information you processed at the edge?
+
+23
+00:01:22,265 --> 00:01:27,480
+Someone or something probably wants to receive that data.
+

@@ -1,0 +1,156 @@
+1
+00:00:00,000 --> 00:00:01,665
+To begin this lesson,
+
+2
+00:00:01,665 --> 00:00:07,320
+we'll look into some of the basics of OpenCV and Open Source Computer Vision library.
+
+3
+00:00:07,320 --> 00:00:10,545
+OpenCV is an open source library
+
+4
+00:00:10,545 --> 00:00:14,175
+for various image processing and computer vision techniques.
+
+5
+00:00:14,175 --> 00:00:18,105
+It runs on a highly optimized C++ backend,
+
+6
+00:00:18,105 --> 00:00:21,960
+although it's available for use with Python and Java as well.
+
+7
+00:00:21,960 --> 00:00:26,460
+It's often helpful as part of your overall edge applications.
+
+8
+00:00:26,460 --> 00:00:29,610
+There are a lot of uses of OpenCV.
+
+9
+00:00:29,610 --> 00:00:31,305
+In your use case,
+
+10
+00:00:31,305 --> 00:00:35,730
+you'll largely focus on it's ability to capture and read frames from video streams,
+
+11
+00:00:35,730 --> 00:00:37,230
+whether a video file,
+
+12
+00:00:37,230 --> 00:00:40,195
+or active camera stream, or an image.
+
+13
+00:00:40,195 --> 00:00:44,270
+It also has other pre-processing techniques like converting from
+
+14
+00:00:44,270 --> 00:00:49,715
+one color space to another which may help in extracting certain features from a frame.
+
+15
+00:00:49,715 --> 00:00:53,105
+There also plenty of computer vision techniques included,
+
+16
+00:00:53,105 --> 00:00:56,240
+such as Canny Edge Detection which helps to extract
+
+17
+00:00:56,240 --> 00:00:59,720
+edges such as the shape of a person from an image.
+
+18
+00:00:59,720 --> 00:01:02,870
+It also extends even to a suite of different machine
+
+19
+00:01:02,870 --> 00:01:06,365
+learning classifiers for tasks like face detection.
+
+20
+00:01:06,365 --> 00:01:11,325
+Here are a few useful OpenCV functions you might want in your edge application.
+
+21
+00:01:11,325 --> 00:01:17,525
+VideoCapture can read in a video or image and extract a frame from it for processing.
+
+22
+00:01:17,525 --> 00:01:19,249
+As the name suggests,
+
+23
+00:01:19,249 --> 00:01:21,950
+resize is used to resize a given frame.
+
+24
+00:01:21,950 --> 00:01:24,170
+You've seen this a few times before,
+
+25
+00:01:24,170 --> 00:01:30,185
+cvtColor can convert between different color spaces such as BGR and RGB.
+
+26
+00:01:30,185 --> 00:01:31,910
+You might remember this from back with
+
+27
+00:01:31,910 --> 00:01:35,765
+the TensorFlow models that they're usually trained with RGB images,
+
+28
+00:01:35,765 --> 00:01:39,500
+while OpenCV is going to load frames as BGR.
+
+29
+00:01:39,500 --> 00:01:42,470
+There was a technique with the model optimizer that would build
+
+30
+00:01:42,470 --> 00:01:45,455
+a TensorFlow model to appropriately handle BGR.
+
+31
+00:01:45,455 --> 00:01:49,275
+But if you didn't add that additional argument at the time,
+
+32
+00:01:49,275 --> 00:01:52,745
+you could use this function to convert each image to RGB,
+
+33
+00:01:52,745 --> 00:01:56,180
+but that will add a little extra processing time.
+
+34
+00:01:56,180 --> 00:01:59,725
+Now you've seen cv2.rectangle a little bit before.
+
+35
+00:01:59,725 --> 00:02:03,500
+This is useful for drawing bounding boxes onto an output image.
+
+36
+00:02:03,500 --> 00:02:08,645
+cv2.imwrite is also useful for saving down a given image.
+
+37
+00:02:08,645 --> 00:02:11,660
+Of course, I suggest taking a look at
+
+38
+00:02:11,660 --> 00:02:17,190
+different OpenCV documentation as well as tutorials if you want to learn a little more.
+
+39
+00:02:17,190 --> 00:02:22,650
+We'll look specifically at handling input streams with OpenCV next.
+

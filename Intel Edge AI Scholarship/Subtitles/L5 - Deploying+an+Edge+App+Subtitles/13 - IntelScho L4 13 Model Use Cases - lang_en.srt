@@ -1,0 +1,52 @@
+1
+00:00:00,000 --> 00:00:05,535
+Throughout the course, we've hit a lot on different use cases for edge applications.
+
+2
+00:00:05,535 --> 00:00:07,305
+It's important to think on
+
+3
+00:00:07,305 --> 00:00:11,445
+any additional use cases for a given model or application you build.
+
+4
+00:00:11,445 --> 00:00:16,275
+These can go far beyond the original training set or intended use.
+
+5
+00:00:16,275 --> 00:00:21,735
+For example, object detection can be used for so many different things.
+
+6
+00:00:21,735 --> 00:00:27,525
+If a given model is mainly focused on particular classes along with some post-processing,
+
+7
+00:00:27,525 --> 00:00:30,945
+there can be very different applications to come from it.
+
+8
+00:00:30,945 --> 00:00:34,470
+As another example, think of pose detection.
+
+9
+00:00:34,470 --> 00:00:37,400
+It's useful for video games such as dancing,
+
+10
+00:00:37,400 --> 00:00:39,790
+motion capture, and tracking movement,
+
+11
+00:00:39,790 --> 00:00:43,850
+exercise applications, and even health applications,
+
+12
+00:00:43,850 --> 00:00:46,190
+noting posture or even that something could be
+
+13
+00:00:46,190 --> 00:00:50,040
+wrong are additional use cases that can be used here.
+

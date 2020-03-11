@@ -1,0 +1,228 @@
+1
+00:00:00,000 --> 00:00:02,340
+Great work on this exercise.
+
+2
+00:00:02,340 --> 00:00:07,320
+Now that you've implemented Inputstream handling and a couple other OpenCV techniques,
+
+3
+00:00:07,320 --> 00:00:08,895
+let's look at my approach.
+
+4
+00:00:08,895 --> 00:00:11,040
+So here within the app,
+
+5
+00:00:11,040 --> 00:00:13,695
+this one's a little different than the last view we've done,
+
+6
+00:00:13,695 --> 00:00:16,920
+I'm only taking in the input file as we actually
+
+7
+00:00:16,920 --> 00:00:20,280
+won't worry about performing any inference on this video.
+
+8
+00:00:20,280 --> 00:00:23,055
+All you're going to do is take in an image,
+
+9
+00:00:23,055 --> 00:00:25,470
+video or webcam, although unfortunately
+
+10
+00:00:25,470 --> 00:00:28,635
+the webcam option won't be available within the work space,
+
+11
+00:00:28,635 --> 00:00:33,200
+resize it as noted in the instructions and then you'll
+
+12
+00:00:33,200 --> 00:00:38,270
+also go ahead and perform canny edge detection on each frame and then write it out.
+
+13
+00:00:38,270 --> 00:00:40,445
+Let's go through this step-by-step.
+
+14
+00:00:40,445 --> 00:00:43,970
+First off I decided to create a flag for single images.
+
+15
+00:00:43,970 --> 00:00:47,810
+This is mainly because how this processed is different whether it's
+
+16
+00:00:47,810 --> 00:00:51,665
+an image versus a webcam stream or a video.
+
+17
+00:00:51,665 --> 00:00:56,370
+This is both true when wanting to write to it,
+
+18
+00:00:56,370 --> 00:01:01,120
+like here I use the CV2.Videowriter to write an output video.
+
+19
+00:01:01,120 --> 00:01:06,830
+As you'll see below that video writer writes the frame but if the image flag is true,
+
+20
+00:01:06,830 --> 00:01:10,205
+it's just going to write out a single image file with imwrite.
+
+21
+00:01:10,205 --> 00:01:14,375
+Back up top, you can see that I check the input.
+
+22
+00:01:14,375 --> 00:01:17,240
+In my case I decided if you use CAM as
+
+23
+00:01:17,240 --> 00:01:21,550
+the input that would set it to zero which means the input is webcam.
+
+24
+00:01:21,550 --> 00:01:27,700
+Otherwise, if it's a JPEG or bitmap file I set the image flag to true.
+
+25
+00:01:27,700 --> 00:01:34,385
+Here I feed in the input to VideoCapture and note here when I open this,
+
+26
+00:01:34,385 --> 00:01:37,460
+I switched the arch's that I when it's cam so that instead
+
+27
+00:01:37,460 --> 00:01:40,795
+of actually being cam it gets switched to zero by the time you get here.
+
+28
+00:01:40,795 --> 00:01:43,655
+Otherwise, this could also be the video path.
+
+29
+00:01:43,655 --> 00:01:48,515
+So here if it's not an image we'll create the video writer.
+
+30
+00:01:48,515 --> 00:01:52,675
+Otherwise, I just set out to none and we don't need to use it further.
+
+31
+00:01:52,675 --> 00:01:56,220
+From there, I check if the capture's open.
+
+32
+00:01:56,220 --> 00:02:00,825
+I'll go ahead and read a frame and then I also add in this key press
+
+33
+00:02:00,825 --> 00:02:05,810
+with CV2 at waitKey so that I can easily cancel out of open CV.
+
+34
+00:02:05,810 --> 00:02:08,609
+Further on, as in the instructions
+
+35
+00:02:08,609 --> 00:02:11,770
+and just to give you a little bit more practice with Open CV,
+
+36
+00:02:11,770 --> 00:02:17,740
+I had you resize the image to 100 by 100 and then perform canny edge detection.
+
+37
+00:02:17,740 --> 00:02:22,120
+This is with a min value of a 100 and a max value of 200.
+
+38
+00:02:22,120 --> 00:02:27,625
+Here, again as I mentioned there's a difference with the image flag or without it.
+
+39
+00:02:27,625 --> 00:02:30,205
+Where either we use imwrite to write out
+
+40
+00:02:30,205 --> 00:02:35,210
+the output image or otherwise write to our video writer.
+
+41
+00:02:35,210 --> 00:02:38,490
+Here the key press is checked, and again,
+
+42
+00:02:38,490 --> 00:02:40,950
+this escape character might be Control-C,
+
+43
+00:02:40,950 --> 00:02:43,770
+for instance on a Mac where it will break,
+
+44
+00:02:43,770 --> 00:02:47,000
+and then further out you just need to make sure before you exit
+
+45
+00:02:47,000 --> 00:02:51,285
+the program that you go ahead and release our video writer,
+
+46
+00:02:51,285 --> 00:02:54,030
+capture and destroy all windows.
+
+47
+00:02:54,030 --> 00:02:55,840
+Then here in the terminal,
+
+48
+00:02:55,840 --> 00:02:58,355
+this one's pretty straightforward to run,
+
+49
+00:02:58,355 --> 00:03:02,840
+I would just say python app.py and add my input,
+
+50
+00:03:02,840 --> 00:03:08,030
+and for instance I could use the test video or my blue car,
+
+51
+00:03:08,030 --> 00:03:12,420
+which are the test images in the directory and see the output.
+
+52
+00:03:13,270 --> 00:03:17,630
+So now we've shown how to handle input streams.
+
+53
+00:03:17,630 --> 00:03:20,000
+This is great to be able to handle lots of
+
+54
+00:03:20,000 --> 00:03:23,135
+different sensory information coming in especially with cameras.
+
+55
+00:03:23,135 --> 00:03:28,130
+Next up we'll go ahead and start getting into handling the outputs a little further.
+
+56
+00:03:28,130 --> 00:03:31,700
+You can get a bounding box or some semantic masks,
+
+57
+00:03:31,700 --> 00:03:34,740
+but what do you actually do with them?
+

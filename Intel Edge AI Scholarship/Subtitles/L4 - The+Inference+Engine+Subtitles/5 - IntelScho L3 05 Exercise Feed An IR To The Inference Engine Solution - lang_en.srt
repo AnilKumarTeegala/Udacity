@@ -1,0 +1,252 @@
+1
+00:00:00,000 --> 00:00:04,215
+Nice work. With the IR loaded into the inference engine,
+
+2
+00:00:04,215 --> 00:00:06,870
+we'll soon be able to make inference requests.
+
+3
+00:00:06,870 --> 00:00:10,980
+Let's go ahead and take a quick look and my approach to this exercise.
+
+4
+00:00:10,980 --> 00:00:14,040
+So here we are back in the classroom workspace.
+
+5
+00:00:14,040 --> 00:00:18,765
+Let me go ahead and drag this over so we can view it a little more easily.
+
+6
+00:00:18,765 --> 00:00:23,205
+To start, I made sure to import the necessary libraries.
+
+7
+00:00:23,205 --> 00:00:26,100
+I imported OS mainly just so I can use
+
+8
+00:00:26,100 --> 00:00:30,165
+the name for the XML file towards the binary file for the model.
+
+9
+00:00:30,165 --> 00:00:34,890
+Then from openvino.inference_engine, I went ahead and imported
+
+10
+00:00:34,890 --> 00:00:39,335
+the IENetwork and IECore objects we talked about before.
+
+11
+00:00:39,335 --> 00:00:43,840
+Note that I've added the CPU extension here hard-coded for the workspace.
+
+12
+00:00:43,840 --> 00:00:46,475
+So you don't need to worry about adding that yourself.
+
+13
+00:00:46,475 --> 00:00:50,000
+Below, we can notice from the arguments that we just have to
+
+14
+00:00:50,000 --> 00:00:53,740
+feed in the location of the model XML file and nothing else.
+
+15
+00:00:53,740 --> 00:00:57,105
+Here, let's walk through the to do from the exercise.
+
+16
+00:00:57,105 --> 00:01:00,574
+First, to load the inference engine API,
+
+17
+00:01:00,574 --> 00:01:03,140
+I just use the IECore object,
+
+18
+00:01:03,140 --> 00:01:05,755
+and I went ahead and name that plugin.
+
+19
+00:01:05,755 --> 00:01:11,270
+Below, I've got the model binary file path just by using the model
+
+20
+00:01:11,270 --> 00:01:13,970
+XML file with the OS library I imported
+
+21
+00:01:13,970 --> 00:01:18,205
+earlier and adding the binary extension at the end.
+
+22
+00:01:18,205 --> 00:01:22,260
+Then with IENetwork, we want to load the model,
+
+23
+00:01:22,260 --> 00:01:28,560
+which again is the architecture with the XML and then the weights with the binary file.
+
+24
+00:01:28,560 --> 00:01:32,520
+Further below, I added the CPU extension.
+
+25
+00:01:32,520 --> 00:01:35,780
+Now for your own, I'll actually suggests
+
+26
+00:01:35,780 --> 00:01:39,260
+that even once you've figured out how to use add_extension,
+
+27
+00:01:39,260 --> 00:01:41,585
+you might try running the code without it.
+
+28
+00:01:41,585 --> 00:01:43,970
+You'll notice that some of the models actually don't
+
+29
+00:01:43,970 --> 00:01:46,595
+need the CPU extension that we used here,
+
+30
+00:01:46,595 --> 00:01:49,380
+but at least one of them will.
+
+31
+00:01:49,380 --> 00:01:51,660
+As far as supported layers go,
+
+32
+00:01:51,660 --> 00:01:55,160
+you can use the query_network function we discussed earlier.
+
+33
+00:01:55,160 --> 00:01:57,230
+This just takes our network,
+
+34
+00:01:57,230 --> 00:01:59,135
+and then it needs the device name,
+
+35
+00:01:59,135 --> 00:02:01,835
+which in the workspace is just CPU.
+
+36
+00:02:01,835 --> 00:02:05,135
+Now we can go ahead and iterate through
+
+37
+00:02:05,135 --> 00:02:09,125
+the layers and check for which ones are unsupported layers.
+
+38
+00:02:09,125 --> 00:02:12,260
+This means we can get the layers that are in our network,
+
+39
+00:02:12,260 --> 00:02:14,630
+which will be dictionary keys,
+
+40
+00:02:14,630 --> 00:02:18,490
+and compare them to what was in supported_layers.
+
+41
+00:02:18,490 --> 00:02:23,585
+If this list has anything in it for unsupported layers,
+
+42
+00:02:23,585 --> 00:02:25,415
+then we'll need to end the program.
+
+43
+00:02:25,415 --> 00:02:28,375
+Otherwise, the program will crash.
+
+44
+00:02:28,375 --> 00:02:32,570
+So here, I just went ahead and printed out which layers were
+
+45
+00:02:32,570 --> 00:02:36,800
+supported so the user can go and look for any necessary extensions,
+
+46
+00:02:36,800 --> 00:02:39,440
+and noted that they should check for extensions.
+
+47
+00:02:39,440 --> 00:02:43,390
+After that, I go ahead and exit the program with an error.
+
+48
+00:02:43,390 --> 00:02:47,360
+Lastly, to load the network into the inference engine,
+
+49
+00:02:47,360 --> 00:02:50,195
+you can just use the load_network function.
+
+50
+00:02:50,195 --> 00:02:53,255
+This just needs our network with the CPU.
+
+51
+00:02:53,255 --> 00:02:55,990
+Since we already know now that there's no unsupported layers,
+
+52
+00:02:55,990 --> 00:02:57,670
+or else we would have exited,
+
+53
+00:02:57,670 --> 00:03:01,910
+this function should execute successfully and give us this message.
+
+54
+00:03:01,910 --> 00:03:05,120
+Let's try this out with one of the models.
+
+55
+00:03:05,120 --> 00:03:08,315
+So here's my command to go ahead and run my solution,
+
+56
+00:03:08,315 --> 00:03:10,670
+just Python, the network,
+
+57
+00:03:10,670 --> 00:03:13,610
+and with my model, which I've gone ahead and moved
+
+58
+00:03:13,610 --> 00:03:16,470
+our models into this models directory within the workspace,
+
+59
+00:03:16,470 --> 00:03:18,910
+so it's a little shorter of a path.
+
+60
+00:03:20,000 --> 00:03:23,280
+We can see we successfully reached the end of the script,
+
+61
+00:03:23,280 --> 00:03:29,015
+which means that the inference engine successfully loaded our IR model.
+
+62
+00:03:29,015 --> 00:03:33,235
+Great. Now that we're able to feed in IR to the inference engine,
+
+63
+00:03:33,235 --> 00:03:36,990
+we'll be able to make inference requests very shortly.
+

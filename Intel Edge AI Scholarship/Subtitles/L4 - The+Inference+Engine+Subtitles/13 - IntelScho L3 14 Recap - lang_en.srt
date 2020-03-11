@@ -1,0 +1,28 @@
+1
+00:00:00,000 --> 00:00:05,730
+In this lesson, we've covered the basics of the inference engine, the supported devices,
+
+2
+00:00:05,730 --> 00:00:09,420
+feeding an intermediate representation to the inference engine,
+
+3
+00:00:09,420 --> 00:00:11,580
+as well as making inference request,
+
+4
+00:00:11,580 --> 00:00:14,520
+and then handling the results from the inference engine.
+
+5
+00:00:14,520 --> 00:00:19,290
+You finished up by integrating the inference engine into an application.
+
+6
+00:00:19,290 --> 00:00:22,050
+Next up, we'll take a step back from
+
+7
+00:00:22,050 --> 00:00:28,480
+the OpenVINO Toolkit and look into some additional topics useful for edge applications.
+

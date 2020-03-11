@@ -1,0 +1,168 @@
+1
+00:00:00,000 --> 00:00:02,820
+Now, you're able to take an input stream,
+
+2
+00:00:02,820 --> 00:00:04,500
+perform inference on it,
+
+3
+00:00:04,500 --> 00:00:08,820
+and extract some additional useful information from the output.
+
+4
+00:00:08,820 --> 00:00:12,615
+What if you want this information to be available somewhere else?
+
+5
+00:00:12,615 --> 00:00:15,055
+Going forward from the pet example,
+
+6
+00:00:15,055 --> 00:00:19,670
+maybe you want to open a webpage or an app on your phone where you can receive
+
+7
+00:00:19,670 --> 00:00:24,520
+the data both on how many times the cat and the dog got caught in the same room,
+
+8
+00:00:24,520 --> 00:00:28,025
+as well as even a recording of when that happened.
+
+9
+00:00:28,025 --> 00:00:31,130
+We'll first look at MQTT,
+
+10
+00:00:31,130 --> 00:00:34,865
+which is useful for sending small portions of data to servers,
+
+11
+00:00:34,865 --> 00:00:39,280
+as well as a technique for sending frames of video to a server.
+
+12
+00:00:39,280 --> 00:00:43,890
+MQTT stands for MQ Telemetry Transport,
+
+13
+00:00:43,890 --> 00:00:50,180
+where the MQ came from an old IBM product line called IBMMQ for message queues.
+
+14
+00:00:50,180 --> 00:00:54,620
+Although MQTT itself does not actually use queues.
+
+15
+00:00:54,620 --> 00:00:58,910
+Now, this doesn't really give a lot away about its usage.
+
+16
+00:00:58,910 --> 00:01:04,045
+Really, it's useful because it's a lightweight publish-subscribe architecture.
+
+17
+00:01:04,045 --> 00:01:08,795
+It's designed for resource constrained devices and low bandwidth set-ups.
+
+18
+00:01:08,795 --> 00:01:10,820
+This is used a lot for Internet of
+
+19
+00:01:10,820 --> 00:01:14,525
+Things devices or other machine-to-machine communication,
+
+20
+00:01:14,525 --> 00:01:17,345
+and it's been around since 1999.
+
+21
+00:01:17,345 --> 00:01:21,985
+Port 1883 is reserved for use with MQTT,
+
+22
+00:01:21,985 --> 00:01:25,145
+and you'll see us use that with servers later.
+
+23
+00:01:25,145 --> 00:01:26,930
+On the last slide,
+
+24
+00:01:26,930 --> 00:01:29,690
+I mentioned the concept of publish-subscribe.
+
+25
+00:01:29,690 --> 00:01:32,660
+In this architecture, there's a broker or
+
+26
+00:01:32,660 --> 00:01:36,545
+hub that receives messages published to it by different clients.
+
+27
+00:01:36,545 --> 00:01:41,405
+Then routes the messages to any client subscribing to those particular messages.
+
+28
+00:01:41,405 --> 00:01:44,945
+This is managed through the use of what are called topics.
+
+29
+00:01:44,945 --> 00:01:50,360
+One client publishes to a topic while another client subscribes to that topic.
+
+30
+00:01:50,360 --> 00:01:53,690
+The broker is going to handle passing the message from
+
+31
+00:01:53,690 --> 00:01:57,230
+the publishing client on that topic to any subscribers.
+
+32
+00:01:57,230 --> 00:02:01,700
+These clients don't actually need to know anything about each other,
+
+33
+00:02:01,700 --> 00:02:05,090
+just the topic that they want to publish or subscribe to.
+
+34
+00:02:05,090 --> 00:02:10,010
+MQTT is just one example of this and is very lightweight.
+
+35
+00:02:10,010 --> 00:02:15,590
+While you could publish information such as the counted bounding boxes over MQTT,
+
+36
+00:02:15,590 --> 00:02:19,430
+you cannot publish a video frame using it.
+
+37
+00:02:19,430 --> 00:02:22,510
+Publish-subscribe is also used with self-driving cars,
+
+38
+00:02:22,510 --> 00:02:26,910
+such as with the Robot Operating System or ROS for short,
+
+39
+00:02:26,910 --> 00:02:30,950
+where a stoplight classifier may publish on one topic with
+
+40
+00:02:30,950 --> 00:02:35,240
+an intermediate system that determines when to break subscribing to that topic,
+
+41
+00:02:35,240 --> 00:02:37,760
+and then that system may publish to
+
+42
+00:02:37,760 --> 00:02:42,480
+another topic that the actual brake system itself subscribes to.
+

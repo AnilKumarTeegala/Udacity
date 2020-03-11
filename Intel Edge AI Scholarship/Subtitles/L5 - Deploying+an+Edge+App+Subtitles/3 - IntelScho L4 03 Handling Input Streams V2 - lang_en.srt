@@ -1,0 +1,156 @@
+1
+00:00:00,000 --> 00:00:03,270
+In previous lessons you've got everything set up
+
+2
+00:00:03,270 --> 00:00:06,570
+to perform efficient inference with the OpenVINO toolkit.
+
+3
+00:00:06,570 --> 00:00:11,320
+But what about actually feeding the input into the Edge application itself?
+
+4
+00:00:11,320 --> 00:00:14,445
+Being able to efficiently handle video files,
+
+5
+00:00:14,445 --> 00:00:19,350
+image files or webcam streams is an important part of an Edge application.
+
+6
+00:00:19,350 --> 00:00:23,995
+If I were to be running the webcam on my MacBook for instance and perform an inference,
+
+7
+00:00:23,995 --> 00:00:29,225
+a surprisingly large amount of resources get used up simply to use the webcam.
+
+8
+00:00:29,225 --> 00:00:33,605
+That's why it's useful to utilize the OpenCV functions built for this.
+
+9
+00:00:33,605 --> 00:00:38,720
+They are about as optimized for general use with input streams as you'll find anywhere.
+
+10
+00:00:38,720 --> 00:00:43,220
+We saw the cv2.VideoCapture function in the previous video.
+
+11
+00:00:43,220 --> 00:00:45,320
+This function takes either a zero for
+
+12
+00:00:45,320 --> 00:00:49,535
+webcam use or the path to the input image or video file.
+
+13
+00:00:49,535 --> 00:00:51,860
+That's just the first step though.
+
+14
+00:00:51,860 --> 00:00:56,135
+This capture object must then be opened with Capture.Open,
+
+15
+00:00:56,135 --> 00:00:59,870
+then you can basically make a loop by checking if Capture.
+
+16
+00:00:59,870 --> 00:01:05,285
+opened. You can read a frame from it with a Capture.Read function.
+
+17
+00:01:05,285 --> 00:01:08,120
+This function will actually return two items;
+
+18
+00:01:08,120 --> 00:01:10,040
+a boolean and the frame.
+
+19
+00:01:10,040 --> 00:01:12,020
+If the boolean is false,
+
+20
+00:01:12,020 --> 00:01:14,660
+there is no further frames to read such as if the video's
+
+21
+00:01:14,660 --> 00:01:17,810
+over so you should go ahead and break out of the loop.
+
+22
+00:01:17,810 --> 00:01:20,440
+Once there are no more frames left to capture,
+
+23
+00:01:20,440 --> 00:01:24,560
+there's a couple of extra steps to end the process with OpenCV.
+
+24
+00:01:24,560 --> 00:01:27,800
+First you'll need to release the capture which will
+
+25
+00:01:27,800 --> 00:01:31,205
+allow OpenCV to release the captured file or string.
+
+26
+00:01:31,205 --> 00:01:36,530
+Secondly, you'll likely want to use the cv2Destroy-all-Windows function.
+
+27
+00:01:36,530 --> 00:01:39,230
+This will make sure any additional windows
+
+28
+00:01:39,230 --> 00:01:43,085
+such as those use-of-you output frames are closed out.
+
+29
+00:01:43,085 --> 00:01:47,465
+There's actually one other thing to consider while the stream itself is still capturing,
+
+30
+00:01:47,465 --> 00:01:49,415
+checking for key presses.
+
+31
+00:01:49,415 --> 00:01:52,490
+You may want to add a call to cv2.waltkey within
+
+32
+00:01:52,490 --> 00:01:56,090
+the loop and break the loop if your desired key is pressed.
+
+33
+00:01:56,090 --> 00:01:59,330
+For instance if the key pressed is 27,
+
+34
+00:01:59,330 --> 00:02:02,600
+that's the escape key such as control C on your keyboard,
+
+35
+00:02:02,600 --> 00:02:06,485
+that way you can close the stream midway throughout with a single button.
+
+36
+00:02:06,485 --> 00:02:08,150
+Otherwise you may get stuck with
+
+37
+00:02:08,150 --> 00:02:11,195
+an open window that's a bit difficult to close on its own.
+
+38
+00:02:11,195 --> 00:02:14,210
+Next up you'll get to practice some of these skills
+
+39
+00:02:14,210 --> 00:02:18,180
+yourself and the exercise on handling input streams
+
