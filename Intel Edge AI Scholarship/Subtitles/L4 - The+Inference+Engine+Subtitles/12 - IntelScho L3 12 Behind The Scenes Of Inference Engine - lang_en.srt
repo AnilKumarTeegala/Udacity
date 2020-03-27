@@ -1,0 +1,176 @@
+1
+00:00:00,000 --> 00:00:05,160
+Before we step into the final lesson where we'll focus on some more general edge topics,
+
+2
+00:00:05,160 --> 00:00:08,640
+let's take a look under the hood of the inference engine.
+
+3
+00:00:08,640 --> 00:00:14,250
+I noted previously that the inference engine is built and optimized in C++,
+
+4
+00:00:14,250 --> 00:00:17,235
+although that's specific to the CPU version and
+
+5
+00:00:17,235 --> 00:00:20,760
+isn't necessarily the same for all the different devices.
+
+6
+00:00:20,760 --> 00:00:25,845
+These differences under the hood utilize different optimization based on the hardware,
+
+7
+00:00:25,845 --> 00:00:30,600
+although you are able to work with a shared API to interact with inference engine,
+
+8
+00:00:30,600 --> 00:00:33,590
+while largely being able to ignore these differences.
+
+9
+00:00:33,590 --> 00:00:38,155
+So why is the inference engine built in C++ for CPUs?
+
+10
+00:00:38,155 --> 00:00:42,020
+In fact, many different computer vision in AI frameworks are
+
+11
+00:00:42,020 --> 00:00:45,965
+built with C++ and have additional Python interfaces.
+
+12
+00:00:45,965 --> 00:00:48,890
+OpenCV and TensorFlow, for example,
+
+13
+00:00:48,890 --> 00:00:51,080
+are built primarily in C++,
+
+14
+00:00:51,080 --> 00:00:54,620
+but many users interact with the libraries in Python.
+
+15
+00:00:54,620 --> 00:00:58,820
+C++ is faster and more efficient than Python when well implemented.
+
+16
+00:00:58,820 --> 00:01:03,620
+It also gives the user more direct access to items in memory and such,
+
+17
+00:01:03,620 --> 00:01:06,545
+and they can be passed between modules more efficiently.
+
+18
+00:01:06,545 --> 00:01:10,030
+C++ is compiled and optimized ahead of runtime,
+
+19
+00:01:10,030 --> 00:01:14,525
+whereas Python basically gets read line by line when a script is run.
+
+20
+00:01:14,525 --> 00:01:16,070
+On the flip side,
+
+21
+00:01:16,070 --> 00:01:19,685
+Python can make it easier for prototyping and fast fixes.
+
+22
+00:01:19,685 --> 00:01:23,090
+It's fairly common then to be using the C++ library
+
+23
+00:01:23,090 --> 00:01:26,270
+for the actual computer vision techniques and inferencing,
+
+24
+00:01:26,270 --> 00:01:29,830
+but with the actual application sometimes being in Python,
+
+25
+00:01:29,830 --> 00:01:34,205
+and then interacting with the C++ Library via a Python API.
+
+26
+00:01:34,205 --> 00:01:36,470
+As I mentioned a bit ago,
+
+27
+00:01:36,470 --> 00:01:40,585
+the exact optimizations differ by device with the inference engine.
+
+28
+00:01:40,585 --> 00:01:45,170
+Well, from your end of interacting with the inference engine is mostly the same.
+
+29
+00:01:45,170 --> 00:01:49,385
+There's actually separate plugins within it for working with each device type.
+
+30
+00:01:49,385 --> 00:01:51,920
+CPUs, for instance, rely on
+
+31
+00:01:51,920 --> 00:01:56,970
+the Intel Math Kernel Library for Deep Neural Networks or MKL-DNN.
+
+32
+00:01:56,970 --> 00:02:01,565
+CPUs also have some extra work to help improve device throughput,
+
+33
+00:02:01,565 --> 00:02:04,895
+especially for CPUs with higher numbers of cores.
+
+34
+00:02:04,895 --> 00:02:12,210
+GPUs meanwhile, utilize the Compute Library for Deep Neural Networks or clDNN,
+
+35
+00:02:12,210 --> 00:02:15,170
+which also uses OpenCL within it.
+
+36
+00:02:15,170 --> 00:02:20,315
+Using OpenCL introduces a small overhead right when the GPU plugin is loaded,
+
+37
+00:02:20,315 --> 00:02:23,260
+but it's only a onetime overhead cost.
+
+38
+00:02:23,260 --> 00:02:29,400
+The GPU plug-in works best with FP16 models over the FP32 models.
+
+39
+00:02:29,400 --> 00:02:32,835
+Getting to DPU devices like the neural compute stick,
+
+40
+00:02:32,835 --> 00:02:36,905
+there are additional costs associated with it being a USB device.
+
+41
+00:02:36,905 --> 00:02:42,185
+It's actually recommended to be processing four inference requests at any given time.
+
+42
+00:02:42,185 --> 00:02:45,530
+This is in order to hide the cost of data transfer from
+
+43
+00:02:45,530 --> 00:02:49,240
+the main device to the DPU through the USB.
+
+44
+00:02:49,240 --> 00:02:54,480
+Later courses, we'll dive into these hardware differences in more detail.
+

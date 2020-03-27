@@ -1,0 +1,192 @@
+1
+00:00:00,000 --> 00:00:03,900
+We've mentioned a few times there different optimization techniques at
+
+2
+00:00:03,900 --> 00:00:08,025
+play with the OpenVINO Toolkit and the supported frameworks.
+
+3
+00:00:08,025 --> 00:00:13,545
+Let's look at a few of these including quantization, freezing, and fusing.
+
+4
+00:00:13,545 --> 00:00:17,640
+Back in the first lesson when you downloaded different pre-trained models,
+
+5
+00:00:17,640 --> 00:00:20,565
+you've downloaded certain precisions of these models.
+
+6
+00:00:20,565 --> 00:00:24,360
+Quantization is related to this topic of precision or
+
+7
+00:00:24,360 --> 00:00:28,980
+how many bits are used to represent the weights and biases of the model.
+
+8
+00:00:28,980 --> 00:00:33,375
+During training, having these very accurate numbers can be helpful,
+
+9
+00:00:33,375 --> 00:00:36,620
+but it's often the case in the inference that the precision
+
+10
+00:00:36,620 --> 00:00:40,370
+can be reduced without substantial loss of accuracy.
+
+11
+00:00:40,370 --> 00:00:45,110
+Quantization is the process of reducing the precision of a model.
+
+12
+00:00:45,110 --> 00:00:47,030
+With the OpenVINO Toolkit,
+
+13
+00:00:47,030 --> 00:00:51,950
+I was using default to FP32 or 32-bit floating-point values,
+
+14
+00:00:51,950 --> 00:00:55,200
+while FP16 and INT8 for
+
+15
+00:00:55,200 --> 00:00:59,945
+16-bit floating-point and eight-bit integer values are also available.
+
+16
+00:00:59,945 --> 00:01:03,590
+INT8 is only available in the pre-trained models
+
+17
+00:01:03,590 --> 00:01:07,670
+as a model optimizer is not able to read that level of precision.
+
+18
+00:01:07,670 --> 00:01:11,830
+FP16 and INT8 will lose some accuracy,
+
+19
+00:01:11,830 --> 00:01:15,970
+but the models will be smaller and memory and the compute time is faster.
+
+20
+00:01:15,970 --> 00:01:21,275
+Therefore, this is a very common method used for running models at the edge.
+
+21
+00:01:21,275 --> 00:01:25,130
+Freezing in this context is different than what you may
+
+22
+00:01:25,130 --> 00:01:29,120
+normally think of as freezing in training neural networks.
+
+23
+00:01:29,120 --> 00:01:31,820
+In training, this usually means freezing
+
+24
+00:01:31,820 --> 00:01:36,860
+certain layers so that you fine-tune and train on only a subset of layers.
+
+25
+00:01:36,860 --> 00:01:39,860
+Here, this has been used in contexts of
+
+26
+00:01:39,860 --> 00:01:44,915
+an entire model and is related to TensorFlow models in particular.
+
+27
+00:01:44,915 --> 00:01:48,320
+Freezing TensorFlow models will remove
+
+28
+00:01:48,320 --> 00:01:53,020
+certain operations and metadata only needed for training.
+
+29
+00:01:53,020 --> 00:01:57,885
+For example, backpropagation only exist for training purposes.
+
+30
+00:01:57,885 --> 00:02:00,155
+It is not used for inference.
+
+31
+00:02:00,155 --> 00:02:04,010
+Freezing a TensorFlow model is usually a good idea whether
+
+32
+00:02:04,010 --> 00:02:08,770
+before performing direct inference or converting with the model optimizer.
+
+33
+00:02:08,770 --> 00:02:14,360
+Fusion relates to combining multiple layer operations into a single operation.
+
+34
+00:02:14,360 --> 00:02:17,645
+For example, a batch normalization layer,
+
+35
+00:02:17,645 --> 00:02:23,060
+activation layer, and convolutional layer could be combined into a single operation.
+
+36
+00:02:23,060 --> 00:02:26,135
+This can be particularly useful for inference.
+
+37
+00:02:26,135 --> 00:02:29,675
+The separate operations may occur on separate kernels,
+
+38
+00:02:29,675 --> 00:02:33,005
+while a fuse operation occurs on a single kernel.
+
+39
+00:02:33,005 --> 00:02:37,940
+This will then incur less overhead and switching from one kernel to the next.
+
+40
+00:02:37,940 --> 00:02:41,705
+There are a wide variety of optimization used in the software.
+
+41
+00:02:41,705 --> 00:02:45,230
+Some depend on a given model or layer such as
+
+42
+00:02:45,230 --> 00:02:49,175
+the automatic fusion of certain layers like linear operations.
+
+43
+00:02:49,175 --> 00:02:54,485
+The resonant model in particular also has some of its own optimizations.
+
+44
+00:02:54,485 --> 00:02:59,395
+Check out the link in the classroom for some more information on this specific cities.
+
+45
+00:02:59,395 --> 00:03:01,760
+Of course, there are also
+
+46
+00:03:01,760 --> 00:03:05,390
+the different precision levels you choose when using the model optimizer.
+
+47
+00:03:05,390 --> 00:03:10,100
+There also certain hardware specific optimizations that can be done,
+
+48
+00:03:10,100 --> 00:03:13,620
+although those will be covered in the later courses.
+

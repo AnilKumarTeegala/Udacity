@@ -1,0 +1,132 @@
+1
+00:00:00,000 --> 00:00:04,455
+Moving on from the basics of MQTT and publish-subscribe,
+
+2
+00:00:04,455 --> 00:00:08,370
+I want to show you how to work with MQTT in Python.
+
+3
+00:00:08,370 --> 00:00:14,190
+There's a useful Python library for working with MQTT called paho-mqtt.
+
+4
+00:00:14,190 --> 00:00:18,105
+Within, there's a sub library called client,
+
+5
+00:00:18,105 --> 00:00:20,520
+which as you may guess is how you create
+
+6
+00:00:20,520 --> 00:00:25,050
+the MQTT client that can publish or subscribe to the broker.
+
+7
+00:00:25,050 --> 00:00:30,165
+Now, you'll need to know the IP address of the broker as well as setting the port for it.
+
+8
+00:00:30,165 --> 00:00:33,840
+With those, you can then connect to the client and from
+
+9
+00:00:33,840 --> 00:00:37,770
+there you can either publish or subscribe to different topics.
+
+10
+00:00:37,770 --> 00:00:41,180
+Publishing involves feeding in the topic name as well as
+
+11
+00:00:41,180 --> 00:00:45,005
+a dictionary containing the message that is dumped to JSON.
+
+12
+00:00:45,005 --> 00:00:49,565
+Subscribing just involves feeding in the topic name to be subscribed to.
+
+13
+00:00:49,565 --> 00:00:51,590
+At the bottom of the page,
+
+14
+00:00:51,590 --> 00:00:54,380
+I've linked the documentation for this library.
+
+15
+00:00:54,380 --> 00:00:56,990
+You can use it to answer the quiz below on
+
+16
+00:00:56,990 --> 00:01:00,530
+the proper syntax for publishing and subscribing in Python.
+
+17
+00:01:00,530 --> 00:01:03,560
+You also get to use it in a later exercise for
+
+18
+00:01:03,560 --> 00:01:06,815
+after we've covered streaming videos to servers as well.
+
+19
+00:01:06,815 --> 00:01:08,900
+Before we move on,
+
+20
+00:01:08,900 --> 00:01:10,070
+it's important to remember
+
+21
+00:01:10,070 --> 00:01:16,295
+your Python MQTT client is actually sending this message to a broker server first.
+
+22
+00:01:16,295 --> 00:01:21,550
+So if you wanted to view data from your Python app on a web page somewhere,
+
+23
+00:01:21,550 --> 00:01:24,080
+that web page would actually include code to
+
+24
+00:01:24,080 --> 00:01:27,620
+subscribe to the server not your Python client.
+
+25
+00:01:27,620 --> 00:01:29,400
+Later in this lesson,
+
+26
+00:01:29,400 --> 00:01:33,350
+we'll show you how a Node server can be used to accomplish this.
+
+27
+00:01:33,350 --> 00:01:38,030
+In fact, in the project you will end up with two nodes servers.
+
+28
+00:01:38,030 --> 00:01:41,780
+One that acts as the MQTT server and
+
+29
+00:01:41,780 --> 00:01:45,950
+one that subscribes to that server and actually publishes a web page.
+
+30
+00:01:45,950 --> 00:01:50,075
+Most of the specifics of that are outside the scope of the course.
+
+31
+00:01:50,075 --> 00:01:54,650
+So these servers will be given to you to interact with from your Python application.
+
+32
+00:01:54,650 --> 00:01:58,250
+Next, let's look at streaming video to a server.
+
+33
+00:01:58,250 --> 00:02:03,120
+The other thing that final Node server will be able to receive.
+

@@ -1,0 +1,84 @@
+1
+00:00:00,000 --> 00:00:04,170
+You've made it through a ton of OpenVINO Toolkit fundamentals.
+
+2
+00:00:04,170 --> 00:00:08,235
+Now, it's time to integrate everything into an application.
+
+3
+00:00:08,235 --> 00:00:12,225
+Coming up, we will be converting a model with the model optimizer,
+
+4
+00:00:12,225 --> 00:00:14,475
+loading it with the inference engine,
+
+5
+00:00:14,475 --> 00:00:18,060
+adding any necessary pre-processing steps for the input frame,
+
+6
+00:00:18,060 --> 00:00:20,955
+making inference requests and performing inference,
+
+7
+00:00:20,955 --> 00:00:23,415
+and handling and processing the outputs.
+
+8
+00:00:23,415 --> 00:00:27,345
+Of course, we'll make sure all of this gets built into an application.
+
+9
+00:00:27,345 --> 00:00:28,965
+That sounds like a lot.
+
+10
+00:00:28,965 --> 00:00:31,560
+But you actually know how to do all of this already.
+
+11
+00:00:31,560 --> 00:00:34,550
+I'm throwing in a couple of extra steps that go on
+
+12
+00:00:34,550 --> 00:00:37,955
+top of just the OpenVINO Toolkit pieces as well.
+
+13
+00:00:37,955 --> 00:00:40,940
+But we'll go ahead and use some of your inference outputs.
+
+14
+00:00:40,940 --> 00:00:43,580
+But first, is to add functionality
+
+15
+00:00:43,580 --> 00:00:46,490
+for different confidence thresholds to determine when to drop
+
+16
+00:00:46,490 --> 00:00:49,610
+bounding boxes for the output and the other is
+
+17
+00:00:49,610 --> 00:00:53,180
+adding functionality for different colors of the bounding boxes themselves.
+
+18
+00:00:53,180 --> 00:00:55,045
+By the end of the exercise,
+
+19
+00:00:55,045 --> 00:00:58,760
+you've fully integrated the inference engine into the app as
+
+20
+00:00:58,760 --> 00:01:03,065
+well as having some additional customization available for the apps output.
+
+21
+00:01:03,065 --> 00:01:06,630
+Good luck and I'll see you back here soon.
+

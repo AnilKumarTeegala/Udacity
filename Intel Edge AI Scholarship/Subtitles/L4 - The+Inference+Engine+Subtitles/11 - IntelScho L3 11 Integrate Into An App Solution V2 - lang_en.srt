@@ -1,0 +1,404 @@
+1
+00:00:00,000 --> 00:00:01,785
+Outstanding.
+
+2
+00:00:01,785 --> 00:00:04,125
+You've really worked in the whole workflow here
+
+3
+00:00:04,125 --> 00:00:07,020
+to utilize the OpenVINO toolkit for this app.
+
+4
+00:00:07,020 --> 00:00:10,665
+Since we covered some of the steps before in earlier exercises,
+
+5
+00:00:10,665 --> 00:00:14,760
+I'm going to mainly focus on the new items here like handling the output,
+
+6
+00:00:14,760 --> 00:00:16,410
+integration into the app,
+
+7
+00:00:16,410 --> 00:00:20,925
+and adding that additional functionality and customization through the command line.
+
+8
+00:00:20,925 --> 00:00:23,070
+You can check out the solution code in
+
+9
+00:00:23,070 --> 00:00:26,550
+the workspace if you're stuck on any of the other parts.
+
+10
+00:00:26,550 --> 00:00:29,495
+Once again we're back in the classroom workspace.
+
+11
+00:00:29,495 --> 00:00:32,390
+Now this one was a little bit more intensive of
+
+12
+00:00:32,390 --> 00:00:36,825
+an exercise as you had to go through all the various steps we've learned so far.
+
+13
+00:00:36,825 --> 00:00:39,215
+I'll start out with some of the new things,
+
+14
+00:00:39,215 --> 00:00:42,085
+starting with the inference Python file,
+
+15
+00:00:42,085 --> 00:00:44,990
+I'll move it over here so we can see it a little easier.
+
+16
+00:00:44,990 --> 00:00:50,330
+So the three parts you had to deal with here were to begin asynchronous inference,
+
+17
+00:00:50,330 --> 00:00:53,405
+wait, as well as extracting the output.
+
+18
+00:00:53,405 --> 00:00:56,800
+Now you did mostly do the async inference before,
+
+19
+00:00:56,800 --> 00:00:59,120
+but I just wanted to point it out here again,
+
+20
+00:00:59,120 --> 00:01:01,490
+if you start async you'll feed in
+
+21
+00:01:01,490 --> 00:01:05,075
+the request ID because we actually are only feeding in one at a time,
+
+22
+00:01:05,075 --> 00:01:09,245
+although in real asynchronous you'd want to have that as an input to the function.
+
+23
+00:01:09,245 --> 00:01:11,150
+The inputs here are
+
+24
+00:01:11,150 --> 00:01:16,880
+our input blob which was actually extracted up here from our network inputs,
+
+25
+00:01:16,880 --> 00:01:18,725
+and then you feed in the image.
+
+26
+00:01:18,725 --> 00:01:22,850
+From there, you need to be able to wait for that request to be complete.
+
+27
+00:01:22,850 --> 00:01:25,465
+Note that I feed a negative one here,
+
+28
+00:01:25,465 --> 00:01:28,910
+so that it will actually wait until that is complete and then return
+
+29
+00:01:28,910 --> 00:01:33,400
+the status code to be zero that we can now extract our output.
+
+30
+00:01:33,400 --> 00:01:35,940
+This is the first really new part,
+
+31
+00:01:35,940 --> 00:01:38,385
+you'll see with our executable network,
+
+32
+00:01:38,385 --> 00:01:41,205
+we again feed in our request ID as zero,
+
+33
+00:01:41,205 --> 00:01:43,850
+although again you may want to add this as
+
+34
+00:01:43,850 --> 00:01:48,640
+an argument parameter if you do actually have multiple requests running.
+
+35
+00:01:48,640 --> 00:01:54,170
+At the end user outputs and the self.output blob which similarly to
+
+36
+00:01:54,170 --> 00:01:59,630
+our input blob from before we extracted up here by iterating through the outputs.
+
+37
+00:01:59,630 --> 00:02:03,635
+Now let's go ahead and shift over to the app itself,
+
+38
+00:02:03,635 --> 00:02:08,045
+I'll start with an app that doesn't have all the customizations added in yet,
+
+39
+00:02:08,045 --> 00:02:10,070
+so we'll skip this step for now.
+
+40
+00:02:10,070 --> 00:02:11,750
+Down below of course are
+
+41
+00:02:11,750 --> 00:02:15,755
+your earlier steps of initializing an inference engine and loading it,
+
+42
+00:02:15,755 --> 00:02:20,995
+and note here that we have some new code to actually use a video for the first time.
+
+43
+00:02:20,995 --> 00:02:25,225
+You can pre-process the frame similarly to how you've done before,
+
+44
+00:02:25,225 --> 00:02:29,330
+here you'll call the async inference function you implemented,
+
+45
+00:02:29,330 --> 00:02:33,355
+and then check whether the wait function returns zero.
+
+46
+00:02:33,355 --> 00:02:36,630
+When you do, you can extract the output,
+
+47
+00:02:36,630 --> 00:02:39,395
+so this is just my function to actually extract
+
+48
+00:02:39,395 --> 00:02:42,845
+the bounding boxes and draw them back onto their original frame.
+
+49
+00:02:42,845 --> 00:02:48,830
+Up above, you can see here it's just extracting because it's a one by one to start,
+
+50
+00:02:48,830 --> 00:02:51,350
+I go down a couple of dimensions to the 100 by
+
+51
+00:02:51,350 --> 00:02:55,745
+7 and each of these hundreds is a single bounding box.
+
+52
+00:02:55,745 --> 00:02:59,885
+The confidence is going to be the third item,
+
+53
+00:02:59,885 --> 00:03:02,780
+as the one before that would actually be the class,
+
+54
+00:03:02,780 --> 00:03:06,890
+so if we also wanted to output that class you can get that from box one.
+
+55
+00:03:06,890 --> 00:03:11,020
+Then here I'm just using a default of 0.5 for the confidence,
+
+56
+00:03:11,020 --> 00:03:15,595
+this is now an area I can see that I'll be able to customize here in a second.
+
+57
+00:03:15,595 --> 00:03:22,085
+Now I extract out each of the bounding box points and feed them in to create a rectangle.
+
+58
+00:03:22,085 --> 00:03:25,295
+Here's the color we're going to draw the rectangle in,
+
+59
+00:03:25,295 --> 00:03:29,440
+and remember because it's BGR for OpenCV,
+
+60
+00:03:29,440 --> 00:03:31,920
+the 255 here is for red,
+
+61
+00:03:31,920 --> 00:03:34,195
+so these bounding boxes will be red.
+
+62
+00:03:34,195 --> 00:03:37,235
+Now let's look at how we would customize this.
+
+63
+00:03:37,235 --> 00:03:40,505
+Now I'm back with a more customized app,
+
+64
+00:03:40,505 --> 00:03:44,335
+you can see how I feed this into our ArgumentParser,
+
+65
+00:03:44,335 --> 00:03:49,070
+so I just added a C description for color and CT description.
+
+66
+00:03:49,070 --> 00:03:53,030
+I think maybe, I could also consider BC for bounding
+
+67
+00:03:53,030 --> 00:03:58,095
+box color or something similar as well and then I add these as arguments.
+
+68
+00:03:58,095 --> 00:04:02,885
+Notice that in my case I added these as optional and I set a default,
+
+69
+00:04:02,885 --> 00:04:05,540
+so note I'm using a string here and you'll notice
+
+70
+00:04:05,540 --> 00:04:08,170
+that is just specific to my implementation,
+
+71
+00:04:08,170 --> 00:04:11,220
+you could potentially feed in the value directly.
+
+72
+00:04:11,220 --> 00:04:16,385
+Here's my confidence threshold which again I'll set a default of 0.5 to.
+
+73
+00:04:16,385 --> 00:04:20,870
+Now I noted with my r.c for
+
+74
+00:04:20,870 --> 00:04:23,990
+color that I was using a string and
+
+75
+00:04:23,990 --> 00:04:28,170
+that's because I just mapped a dictionary back to these values.
+
+76
+00:04:28,180 --> 00:04:35,300
+Remember it's BGR, so 255,0,0 will be blue and so on for green and red.
+
+77
+00:04:35,300 --> 00:04:38,420
+Now if I get an invalid dictionary
+
+78
+00:04:38,420 --> 00:04:41,960
+key meaning someone gave me a color that I wasn't expecting,
+
+79
+00:04:41,960 --> 00:04:47,000
+I'm just going to default to blue just like I did up in the ArgumentParser itself.
+
+80
+00:04:47,000 --> 00:04:49,050
+We're then drawing the boxes,
+
+81
+00:04:49,050 --> 00:04:51,540
+I'm going to make sure I have the args feeding in,
+
+82
+00:04:51,540 --> 00:04:54,370
+and this time instead of using 0.5 here,
+
+83
+00:04:54,370 --> 00:04:57,020
+I feed in the confidence threshold.
+
+84
+00:04:57,020 --> 00:04:59,660
+Similarly in drawing the rectangle,
+
+85
+00:04:59,660 --> 00:05:01,930
+I'll feed in the argument color.
+
+86
+00:05:01,930 --> 00:05:05,000
+Down below, you can also see that I extract
+
+87
+00:05:05,000 --> 00:05:07,640
+this here and make sure that I convert the color,
+
+88
+00:05:07,640 --> 00:05:10,085
+which is converting from my string into
+
+89
+00:05:10,085 --> 00:05:14,135
+the values that will actually have fed into cv2 rectangle.
+
+90
+00:05:14,135 --> 00:05:17,855
+Then here I also make sure that the confidence threshold is a float,
+
+91
+00:05:17,855 --> 00:05:21,065
+you could potentially do that in the ArgumentParser itself.
+
+92
+00:05:21,065 --> 00:05:25,070
+So here I'll go ahead and run my app from the terminal with
+
+93
+00:05:25,070 --> 00:05:29,690
+my model file which is actually our TensorFlow model we converted earlier,
+
+94
+00:05:29,690 --> 00:05:34,890
+I'm going to set the bounding box color to green and a confidence threshold of 0.6.
+
+95
+00:05:40,130 --> 00:05:45,260
+So there you have it, you've fully integrated the inference engine as well
+
+96
+00:05:45,260 --> 00:05:49,940
+as all the other parts of the OpenVINO toolkit into an edge application.
+
+97
+00:05:49,940 --> 00:05:52,430
+However, there are some other parts of
+
+98
+00:05:52,430 --> 00:05:55,085
+edge application that we're still implementing for you.
+
+99
+00:05:55,085 --> 00:05:57,635
+There's a lot of different communication in such
+
+100
+00:05:57,635 --> 00:06:00,049
+that still needs to happen for an edge application,
+
+101
+00:06:00,049 --> 00:06:03,300
+and that's what we're going to cover in the next lesson.
+

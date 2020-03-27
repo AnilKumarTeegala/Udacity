@@ -1,0 +1,380 @@
+1
+00:00:00,000 --> 00:00:02,820
+I hope you had some fun with this exercise.
+
+2
+00:00:02,820 --> 00:00:05,310
+It seems like it's maybe something that could happen in
+
+3
+00:00:05,310 --> 00:00:08,295
+real life and something you might want to implement at home.
+
+4
+00:00:08,295 --> 00:00:11,850
+Let's go ahead and walk through what I did in this exercise.
+
+5
+00:00:11,850 --> 00:00:15,420
+Just to go back over the background of this exercise,
+
+6
+00:00:15,420 --> 00:00:17,085
+we have three pets at home,
+
+7
+00:00:17,085 --> 00:00:18,870
+a cat and two dogs.
+
+8
+00:00:18,870 --> 00:00:21,990
+The cat and one of the dogs get together fine,
+
+9
+00:00:21,990 --> 00:00:26,760
+but the cat and the second dog always get into fights when they're around each other.
+
+10
+00:00:26,760 --> 00:00:29,640
+So for this IoT device,
+
+11
+00:00:29,640 --> 00:00:31,920
+we're going to use a webcam essentially.
+
+12
+00:00:31,920 --> 00:00:36,180
+In our case, it'll be an input video but check
+
+13
+00:00:36,180 --> 00:00:41,770
+whether what we see is the cat and dog number 1 together or the cat and dog number 2.
+
+14
+00:00:41,770 --> 00:00:43,440
+It could also be of course,
+
+15
+00:00:43,440 --> 00:00:47,145
+that now the pets are on there or only one of the pets or both dogs.
+
+16
+00:00:47,145 --> 00:00:49,730
+Really, what we're mainly concerned about is
+
+17
+00:00:49,730 --> 00:00:52,835
+the cat and dog number 1 and the cat and dog number 2.
+
+18
+00:00:52,835 --> 00:00:56,955
+Now, the model that's used for this is super basic,
+
+19
+00:00:56,955 --> 00:01:00,395
+it's really only going to put out three classes.
+
+20
+00:01:00,395 --> 00:01:04,550
+Really what this is, is if you had an object detection model first,
+
+21
+00:01:04,550 --> 00:01:08,090
+they could tell you the dog breeds and maybe if there's a cat in the image,
+
+22
+00:01:08,090 --> 00:01:11,885
+and then you process it a little further just to put them into the three categories
+
+23
+00:01:11,885 --> 00:01:16,265
+of having no pets or the two dogs on screen,
+
+24
+00:01:16,265 --> 00:01:18,215
+or just one pet.
+
+25
+00:01:18,215 --> 00:01:21,815
+Another class it's when it's a cat and dog number 1
+
+26
+00:01:21,815 --> 00:01:25,565
+and another class it's the cat and dog number 2.
+
+27
+00:01:25,565 --> 00:01:28,480
+Let's check out what the input video for this
+
+28
+00:01:28,480 --> 00:01:32,455
+was so we can see exactly what we might expect.
+
+29
+00:01:32,455 --> 00:01:35,860
+Here's the friendly dog and the cat and it's
+
+30
+00:01:35,860 --> 00:01:39,925
+interspersed with the dog and the cat that are confrontational.
+
+31
+00:01:39,925 --> 00:01:41,800
+As we go through the video, in fact,
+
+32
+00:01:41,800 --> 00:01:44,950
+we can see they're fine but near the end,
+
+33
+00:01:44,950 --> 00:01:49,090
+the dog and the cat that don't like each other are going to get in a fight.
+
+34
+00:01:49,090 --> 00:01:51,425
+So let's look at our application.
+
+35
+00:01:51,425 --> 00:01:53,710
+First, we're mainly just going to have to input
+
+36
+00:01:53,710 --> 00:01:56,845
+the XML file for the model as well as the input file,
+
+37
+00:01:56,845 --> 00:02:01,090
+although I went ahead and fed it in directly from our exercise.
+
+38
+00:02:01,090 --> 00:02:06,475
+Then down below, let's look at what I did when it infers on video.
+
+39
+00:02:06,475 --> 00:02:09,850
+Most of this code is what we've covered in the previous exercises,
+
+40
+00:02:09,850 --> 00:02:12,715
+so you actually didn't have to do too much with the rest of it.
+
+41
+00:02:12,715 --> 00:02:17,755
+The main thing I did here is in my assessing the scene function.
+
+42
+00:02:17,755 --> 00:02:22,240
+You might wonder what exactly this incident flag is that I added and it's
+
+43
+00:02:22,240 --> 00:02:27,070
+actually so I can track whether there is a current ongoing incident.
+
+44
+00:02:27,070 --> 00:02:32,045
+What I decided to do was send in the result and a counter,
+
+45
+00:02:32,045 --> 00:02:33,990
+as well as the incident flag,
+
+46
+00:02:33,990 --> 00:02:36,760
+and note that my counter here starts at zero and I'm
+
+47
+00:02:36,760 --> 00:02:39,655
+basically trying to use it for that timestamp, essentially.
+
+48
+00:02:39,655 --> 00:02:41,995
+I look at this and say,
+
+49
+00:02:41,995 --> 00:02:47,190
+"Using my result," because the second class or one for 0,
+
+50
+00:02:47,190 --> 00:02:50,445
+1, and 2 is the one that's the bad combination.
+
+51
+00:02:50,445 --> 00:02:53,015
+If there's not a currently ongoing incident,
+
+52
+00:02:53,015 --> 00:02:56,405
+I want to go ahead and get my timestamp which I got from my counter,
+
+53
+00:02:56,405 --> 00:03:02,240
+and here's 30 for 30 frames per second and I went to log when the incident happened,
+
+54
+00:03:02,240 --> 00:03:04,655
+and then tell my pets to break it up.
+
+55
+00:03:04,655 --> 00:03:09,460
+In this case, I go ahead and set the incident flag to true.
+
+56
+00:03:09,460 --> 00:03:11,650
+This means that the next time around,
+
+57
+00:03:11,650 --> 00:03:13,970
+I'm not constantly starting up this message
+
+58
+00:03:13,970 --> 00:03:18,380
+because if I just sit there and keep hitting the same sound again and again,
+
+59
+00:03:18,380 --> 00:03:21,780
+and again at each of 30 frames per second,
+
+60
+00:03:21,780 --> 00:03:24,295
+well, the pets probably won't ever get the idea.
+
+61
+00:03:24,295 --> 00:03:27,320
+The other case is when either there aren't pets
+
+62
+00:03:27,320 --> 00:03:30,305
+on screen or it's the friendly dog with the cat,
+
+63
+00:03:30,305 --> 00:03:33,995
+the incident flag is set to false so it can reset.
+
+64
+00:03:33,995 --> 00:03:35,990
+Let's look at the app in action.
+
+65
+00:03:35,990 --> 00:03:42,770
+Here, I'll run my app and my model XML file is already here in the directory with me.
+
+66
+00:03:42,770 --> 00:03:45,140
+So note, it's going to take a few seconds to
+
+67
+00:03:45,140 --> 00:03:48,050
+run but each time there's an incident in the video,
+
+68
+00:03:48,050 --> 00:03:52,010
+we'll get out a timestamp and get to see break it up.
+
+69
+00:03:52,010 --> 00:03:56,960
+So the first one happened at 3.8 seconds and if you time that against the original video,
+
+70
+00:03:56,960 --> 00:04:00,480
+that's about when the unfriendly dog and the cat appear.
+
+71
+00:04:01,210 --> 00:04:05,600
+A second incident happens at 10.87 seconds and again,
+
+72
+00:04:05,600 --> 00:04:07,505
+they get a break it up message.
+
+73
+00:04:07,505 --> 00:04:10,670
+Note that this is just when the video is playing.
+
+74
+00:04:10,670 --> 00:04:14,330
+One thing I didn't implement in the app was to actually
+
+75
+00:04:14,330 --> 00:04:17,390
+check for if the incident has gone on for a long time,
+
+76
+00:04:17,390 --> 00:04:19,190
+maybe I would want to replay my message,
+
+77
+00:04:19,190 --> 00:04:21,350
+say once every 10 seconds or something.
+
+78
+00:04:21,350 --> 00:04:23,660
+In this case, it was just because of how the video
+
+79
+00:04:23,660 --> 00:04:26,300
+was cut up that it tended to work out that way.
+
+80
+00:04:26,300 --> 00:04:31,040
+That's it. We saw here that I went ahead and delayed these messages a little bit.
+
+81
+00:04:31,040 --> 00:04:33,440
+This is good so that we're not constantly sending
+
+82
+00:04:33,440 --> 00:04:36,670
+information that's just repeating the same thing again and again.
+
+83
+00:04:36,670 --> 00:04:39,500
+You probably wouldn't constantly want to get alerts at work,
+
+84
+00:04:39,500 --> 00:04:42,265
+that your pets are having difficulties with each other.
+
+85
+00:04:42,265 --> 00:04:44,320
+However, in this fashion,
+
+86
+00:04:44,320 --> 00:04:46,670
+you process the data a little bit and
+
+87
+00:04:46,670 --> 00:04:49,550
+you make sure you cut down on the amount of data getting sent.
+
+88
+00:04:49,550 --> 00:04:52,430
+In this case, we saw that we want to keep this a little bit more
+
+89
+00:04:52,430 --> 00:04:55,320
+lightweight and already understanding this,
+
+90
+00:04:55,320 --> 00:04:57,605
+will help us a lot going forward.
+
+91
+00:04:57,605 --> 00:05:02,270
+Coming up, we'll look at MQTT and FFmpeg,
+
+92
+00:05:02,270 --> 00:05:06,970
+which will help with sending statistics and image frames over the Internet.
+
+93
+00:05:06,970 --> 00:05:09,260
+Now, that you've looked at how you can process
+
+94
+00:05:09,260 --> 00:05:12,245
+information and make sure you're not sending too much of it,
+
+95
+00:05:12,245 --> 00:05:17,760
+both of these methods will be really useful for building your edge applications.
+

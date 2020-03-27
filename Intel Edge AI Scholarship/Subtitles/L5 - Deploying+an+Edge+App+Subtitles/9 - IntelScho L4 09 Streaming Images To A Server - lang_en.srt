@@ -1,0 +1,192 @@
+1
+00:00:00,000 --> 00:00:04,455
+Sometimes you may still want a video feed to be streamed to server.
+
+2
+00:00:04,455 --> 00:00:07,530
+Think about if you had a security camera that could detect
+
+3
+00:00:07,530 --> 00:00:10,830
+a person where they shouldn't be and then send an alert.
+
+4
+00:00:10,830 --> 00:00:13,380
+That's pretty useful on its own but
+
+5
+00:00:13,380 --> 00:00:16,680
+then you'd probably still went to view the footage itself.
+
+6
+00:00:16,680 --> 00:00:18,465
+At the start of the course,
+
+7
+00:00:18,465 --> 00:00:22,400
+we noted that network communications can be expensive in cost,
+
+8
+00:00:22,400 --> 00:00:24,720
+bandwidth, and power consumption.
+
+9
+00:00:24,720 --> 00:00:28,920
+Video streaming consumes a ton of network resources as it
+
+10
+00:00:28,920 --> 00:00:33,480
+requires a lot of data to be sent over the network, clogging everything up.
+
+11
+00:00:33,480 --> 00:00:35,730
+Even with high-speed Internet,
+
+12
+00:00:35,730 --> 00:00:39,445
+multiple users streaming video can cause things to slow down.
+
+13
+00:00:39,445 --> 00:00:41,690
+As such, it's important to first
+
+14
+00:00:41,690 --> 00:00:45,140
+consider whether you even need to stream video to a server,
+
+15
+00:00:45,140 --> 00:00:49,160
+or at least only stream it in certain situations such as
+
+16
+00:00:49,160 --> 00:00:53,525
+when your Edge AI algorithm has detected a particular event.
+
+17
+00:00:53,525 --> 00:00:58,580
+Of course there are certainly situations where streaming video is necessary.
+
+18
+00:00:58,580 --> 00:01:03,200
+The FFmpeg library is named as fast forward mpeg,
+
+19
+00:01:03,200 --> 00:01:08,885
+meaning it's supposed to be a fast way of handling the mpeg video standard among others.
+
+20
+00:01:08,885 --> 00:01:15,260
+In our case, we'll use the FF server feature of FFmpeg which similar to
+
+21
+00:01:15,260 --> 00:01:21,985
+MQTT will actually have an intermediate FFmpeg server that the video frames are sent to.
+
+22
+00:01:21,985 --> 00:01:25,340
+The final node server that displays a web page will
+
+23
+00:01:25,340 --> 00:01:28,760
+actually get the video from that FFmpeg server.
+
+24
+00:01:28,760 --> 00:01:31,985
+There are other ways to handle streaming video as well.
+
+25
+00:01:31,985 --> 00:01:36,650
+In Python you can also use a flask server to do some similar things.
+
+26
+00:01:36,650 --> 00:01:37,980
+Although here in this course,
+
+27
+00:01:37,980 --> 00:01:40,405
+we'll focus on FFmpeg.
+
+28
+00:01:40,405 --> 00:01:44,765
+You can download FFmpeg from FFmpeg.org.
+
+29
+00:01:44,765 --> 00:01:49,745
+Using FF server requires a configuration file that we will provide for you.
+
+30
+00:01:49,745 --> 00:01:54,005
+This configuration file sets the port and IP address of the server
+
+31
+00:01:54,005 --> 00:01:56,210
+as well as some settings like the ports that are seen
+
+32
+00:01:56,210 --> 00:01:59,120
+video from and the frame rate of the video.
+
+33
+00:01:59,120 --> 00:02:02,840
+These settings can also allow it to listen to the system standard out
+
+34
+00:02:02,840 --> 00:02:06,845
+buffer which is how you can send video frames do it in Python.
+
+35
+00:02:06,845 --> 00:02:09,110
+With the CISSP Python library,
+
+36
+00:02:09,110 --> 00:02:13,205
+you can use sys.stdout.buffer.write with
+
+37
+00:02:13,205 --> 00:02:18,530
+input frame as well as flush it to send the frame to the FF server.
+
+38
+00:02:18,530 --> 00:02:23,590
+If you have an FFmpeg folder containing the configuration file for the server,
+
+39
+00:02:23,590 --> 00:02:30,620
+you can then launch the FF server with sudo ffserver-f with a configuration file.
+
+40
+00:02:30,620 --> 00:02:33,220
+You can do this from the command line.
+
+41
+00:02:33,220 --> 00:02:37,160
+To actually capture these output frames with FFmpeg they need
+
+42
+00:02:37,160 --> 00:02:41,240
+to be piped into FFmpeg when the Python script is run.
+
+43
+00:02:41,240 --> 00:02:47,875
+This is done with the Pipe symbol followed by FFmpeg and then any related arguments.
+
+44
+00:02:47,875 --> 00:02:51,540
+Some of these could be pixel format,
+
+45
+00:02:51,540 --> 00:02:56,195
+video size and frame rate etc just like we saw with the configuration file.
+
+46
+00:02:56,195 --> 00:03:00,880
+So what actually receives the output from the FFmpeg server?
+
+47
+00:03:00,880 --> 00:03:06,695
+That could be a final node server with the UI or just another server for storage.
+
+48
+00:03:06,695 --> 00:03:10,860
+Let's go ahead and look at what node is next.
+

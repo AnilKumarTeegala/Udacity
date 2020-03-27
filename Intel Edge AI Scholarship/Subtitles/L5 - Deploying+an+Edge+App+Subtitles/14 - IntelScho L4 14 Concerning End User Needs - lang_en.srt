@@ -1,0 +1,60 @@
+1
+00:00:00,000 --> 00:00:03,795
+Before we close out this lesson and the course,
+
+2
+00:00:03,795 --> 00:00:09,105
+I want to add a final note on considering the needs of your applications end users.
+
+3
+00:00:09,105 --> 00:00:11,040
+If you're building an app for
+
+4
+00:00:11,040 --> 00:00:15,075
+certain end users it's very important to consider their needs.
+
+5
+00:00:15,075 --> 00:00:18,240
+Knowing their needs can inform the various trade offs you
+
+6
+00:00:18,240 --> 00:00:21,450
+make regarding model decisions such as speed,
+
+7
+00:00:21,450 --> 00:00:26,055
+size and accuracy as well as what information you send the servers,
+
+8
+00:00:26,055 --> 00:00:28,965
+security of information etc.
+
+9
+00:00:28,965 --> 00:00:31,550
+If they have more resources available,
+
+10
+00:00:31,550 --> 00:00:35,810
+you might go for a higher accuracy but more resource intensive apps.
+
+11
+00:00:35,810 --> 00:00:39,860
+On end-user with remote low-power devices will likely
+
+12
+00:00:39,860 --> 00:00:44,045
+have to sacrifice some accuracy for a lighter faster application.
+
+13
+00:00:44,045 --> 00:00:48,035
+They'll also need some additional considerations about network usage.
+
+14
+00:00:48,035 --> 00:00:50,420
+This is just to get you thinking.
+
+15
+00:00:50,420 --> 00:00:56,220
+Building edge applications is about more than just models and code.
+
